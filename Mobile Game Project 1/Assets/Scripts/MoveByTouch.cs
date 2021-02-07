@@ -9,6 +9,12 @@ public class MoveByTouch : MonoBehaviour
     public float moveSpeed;
     private Touch touch;
     private Vector2 touchPosition;
+    //public Vector2 destination;
+
+    private void Awake()
+    {
+        //destination = transform.position;
+    }
 
     // Update is called once per frame
     void Update()
@@ -20,6 +26,8 @@ public class MoveByTouch : MonoBehaviour
             if (touch.position.x > (screenWidth / 2))
             {
                 //right
+                //destination += Vector2.right * moveSpeed;
+                //transform.position = Vector2.Lerp(transform.position, destination, 0.5f * Time.deltaTime);
                 transform.Translate(moveSpeed, moveSpeed, 0);
             }
             else
