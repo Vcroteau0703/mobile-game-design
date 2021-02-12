@@ -11,7 +11,7 @@ public class FollowPlayer : MonoBehaviour
     void LateUpdate() //https://gamedev.stackexchange.com/questions/147526/only-make-camera-follow-player-on-x-axis
     {
         tempVec3.x = this.transform.position.x;
-        tempVec3.y = targetTransform.position.y;
+        tempVec3.y = targetTransform.position.y + 3;
         tempVec3.z = this.transform.position.z;
         this.transform.position = tempVec3;
 

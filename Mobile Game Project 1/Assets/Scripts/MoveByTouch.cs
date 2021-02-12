@@ -7,6 +7,7 @@ public class MoveByTouch : MonoBehaviour
 {
     float screenWidth = Screen.width;
     public float moveSpeed;
+    public float upSpeed;
     private Touch touch;
     private Vector2 touchPosition;
     //public Vector2 destination;
@@ -28,17 +29,17 @@ public class MoveByTouch : MonoBehaviour
                 //right
                 //destination += Vector2.right * moveSpeed;
                 //transform.position = Vector2.Lerp(transform.position, destination, 0.5f * Time.deltaTime);
-                transform.Translate(moveSpeed, moveSpeed, 0);
+                transform.Translate(moveSpeed, upSpeed, 0);
             }
             else
             {
                 //left
-                transform.Translate(-moveSpeed, moveSpeed, 0);
+                transform.Translate(-moveSpeed, upSpeed, 0);
             }
         }
         else
         {
-            transform.Translate(0, moveSpeed, 0);
+            transform.Translate(0, upSpeed, 0);
         }
 
         
