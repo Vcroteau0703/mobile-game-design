@@ -590,9 +590,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5e7aa4c91bb19a541934a9773a18ff13, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  fillSpeed: 1
   waterSlider: {fileID: 1350109525}
   sunSlider: {fileID: 2052147125}
   targetTime: 5
+  waterValue: 0
+  sunValue: 0
+  curWaterVal: 0
+  curSunVal: 0
 --- !u!58 &945544316
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -1673,7 +1678,7 @@ PrefabInstance:
     - target: {fileID: 4994006547163439450, guid: f2744b1429aebcf44a15896c01d7b86b,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -1.5
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4994006547163439450, guid: f2744b1429aebcf44a15896c01d7b86b,
         type: 3}
