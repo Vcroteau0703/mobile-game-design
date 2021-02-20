@@ -3,92 +3,73 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+[System.Serializable]
+public class PlayerBoundary
+{
+    public float xMin, xMax;
+}
+
 public class MoveByTouch : MonoBehaviour
 {
-    float screenWidth = Screen.width;
+
+    public PlayerBoundary boundary;
+    public float screenWidth = Screen.width;
     public float moveSpeed;
     public float upSpeed;
     private Touch touch;
     private Vector2 touchPosition;
+    private Rigidbody2D rb;
+    public bool gameActive = true;
     //public Vector2 destination;
 
     private void Awake()
     {
         //destination = transform.position;
+        rb = GetComponent<Rigidbody2D>();
     }
 
     // Update is called once per frame
     void Update()
     {
-
-        if (Input.touchCount > 0)
+        if (gameActive)
         {
-            touch = Input.GetTouch(0);
-            if (touch.position.x > (screenWidth / 2))
+            if (Input.touchCount > 0)
             {
-                //right
-                //destination += Vector2.right * moveSpeed;
-                //transform.position = Vector2.Lerp(transform.position, destination, 0.5f * Time.deltaTime);
-                transform.Translate(moveSpeed, upSpeed, 0);
+                touch = Input.GetTouch(0);
+                if (touch.position.x > (screenWidth / 2))
+                {
+                    //right
+                    moveSpeed = 5;
+                    //transform.Translate(moveSpeed, upSpeed, 0);
+                }
+                else
+                {
+                    //left
+                    moveSpeed = -5;
+                    //transform.Translate(-moveSpeed, upSpeed, 0);
+                }
             }
             else
             {
-                //left
-                transform.Translate(-moveSpeed, upSpeed, 0);
+                moveSpeed = 0;
+                //transform.Translate(0, upSpeed, 0);
             }
+
+            rb.velocity = new Vector3(moveSpeed, upSpeed, 0);
+
+            rb.position = new Vector3
+                (
+                 Mathf.Clamp(rb.position.x, boundary.xMin, boundary.xMax),
+                 this.transform.position.y,
+                 this.transform.position.z
+                );
         }
         else
         {
-            transform.Translate(0, upSpeed, 0);
+            rb.velocity = new Vector3(0, 0, 0);
         }
 
-        
-        //if (Input.touchCount > 0)
-        //{
 
-
-        //    if (theTouch.phase == TouchPhase.Began)
-        //    {
-        //        touchPosition = theTouch.position;
-        //        float x = touchPosition.x;
-        //        if (Mathf.Abs(x) < 0)
-        //        {
-        //            //left
-        //            transform.Translate(-moveSpeed, 0, 0);
-        //        }
-        //        else if (Mathf.Abs(x) > 0)
-        //        {
-        //            //right
-        //            transform.Translate(moveSpeed, 0, 0);
-        //        }
-        //    }
-        //}
     }
 
-    //private void FixedUpdate()
-    //{
-    //    TouchMove();
-    //}
-
-    //void TouchMove()
-    //{
-    //    if (Input.GetMouseButton(0))
-    //    {
-    //        Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-
-    //        if(mousePos.x > 1)
-    //        {
-    //            //move right
-    //            transform.Translate(moveSpeed, 0, 0);
-    //        }
-    //        if(mousePos.x < -1)
-    //        {
-    //            //move left
-    //            transform.Translate(-moveSpeed, 0, 0);
-    //        }
-
-    //    }
-
-
-    //}
 }

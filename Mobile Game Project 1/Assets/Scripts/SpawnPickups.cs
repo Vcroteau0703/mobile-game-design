@@ -13,8 +13,9 @@ public class SpawnPickups : MonoBehaviour
     public float spawnWait;
     public GameObject waterPickup;
     public GameObject sunPickup;
+    public GameObject insect;
     public int spawnCount;
-    bool gameActive = true;
+    public bool gameActive = true;
     public Vector2 spawnPos;
 
     // Start is called before the first frame update
@@ -31,6 +32,7 @@ public class SpawnPickups : MonoBehaviour
 
         pickUps.Add(waterPickup);
         pickUps.Add(sunPickup);
+        pickUps.Add(insect);
     }
 
     private void LateUpdate()
@@ -38,7 +40,7 @@ public class SpawnPickups : MonoBehaviour
         spawnPos.y = player.position.y + 9f;
     }
 
-    private IEnumerator StartSpawning()
+    public IEnumerator StartSpawning()
     {
         yield return new WaitForSeconds(2f);
         while (gameActive)

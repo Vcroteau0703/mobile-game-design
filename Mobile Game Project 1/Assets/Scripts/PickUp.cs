@@ -13,6 +13,8 @@ public class PickUp : MonoBehaviour
     public float sunValue;
     public float curWaterVal;
     public float curSunVal;
+    public GameObject swarmingInsect;
+    public int insectCount = 0;
 
     private void Awake()
     {
@@ -33,6 +35,14 @@ public class PickUp : MonoBehaviour
             waterValue -= 5;
             Destroy(collision.gameObject);
         }
+        else if (collision.tag == "insect")
+        {
+            waterValue -= 10;
+            sunValue -= 10;
+            Destroy(collision.gameObject);
+            Instantiate(swarmingInsect, transform, false);
+            insectCount++;
+        }
     }
 
     private void Update()
@@ -40,8 +50,8 @@ public class PickUp : MonoBehaviour
         targetTime -= Time.deltaTime;
         if(targetTime <= 0.0f)
         {
-            sunValue -= 1;
-            waterValue -= 1;
+            sunValue -= 5;
+            waterValue -= 5;
             targetTime = 1f;
         }
         curWaterVal = Mathf.Lerp(curWaterVal, waterValue, Time.deltaTime * fillSpeed);

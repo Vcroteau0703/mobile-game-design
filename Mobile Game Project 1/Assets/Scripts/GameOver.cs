@@ -7,22 +7,28 @@ using UnityEngine.SceneManagement;
 public class GameOver : MonoBehaviour
 {
     public GameObject player;
-    public MoveByTouch moveByTouch;
+    private MoveByTouch moveByTouch;
     public Slider waterSlider;
     public Slider sunSlider;
     public GameObject gameOver;
+    public GameObject score;
+    private AddScore addScore;
     private SpawnPickups spawnPickups;
+    private PickUp pickUp;
+    public int bestScore;
 
     private void Awake()
     {
         moveByTouch = player.GetComponent<MoveByTouch>();
+        pickUp = player.GetComponent<PickUp>();
         spawnPickups = GetComponent<SpawnPickups>();
+        addScore = score.GetComponent<AddScore>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        if(waterSlider.value == 100 || waterSlider.value == 0 || sunSlider.value == 100 || sunSlider.value == 0)
+        if(waterSlider.value == 100 || waterSlider.value == 0 || sunSlider.value == 100 || sunSlider.value == 0 || pickUp.insectCount == 2)
         {
             Pause();
         }
@@ -32,21 +38,23 @@ public class GameOver : MonoBehaviour
     void Pause()
     {
         gameOver.SetActive(true);
-        moveByTouch.enabled = false;
+        moveByTouch.gameActive = false;
+        spawnPickups.gameActive = false;
+        StopCoroutine(spawnPickups.StartSpawning());
         spawnPickups.enabled = false;
+        pickUp.enabled = false;
+        addScore.enabled = false;
     }
 
-    void UnPause()
-    {
-        moveByTouch.enabled = true;
-        spawnPickups.enabled = true;
-        gameOver.SetActive(false);
-    }
+    //void UnPause()
+    //{
+    //    moveByTouch.enabled = true;
+    //    spawnPickups.enabled = true;
+    //    gameOver.SetActive(false);
+    //}
 
     public void Restart()
     {
-
         SceneManager.LoadScene(0);
-        UnPause();
     }
 }
