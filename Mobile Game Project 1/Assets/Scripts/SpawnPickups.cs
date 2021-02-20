@@ -37,7 +37,7 @@ public class SpawnPickups : MonoBehaviour
 
     private void LateUpdate()
     {
-        spawnPos.y = player.position.y + 9f;
+        spawnPos.y = player.position.y + 10f;
     }
 
     public IEnumerator StartSpawning()

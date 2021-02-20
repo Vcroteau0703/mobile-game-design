@@ -8,6 +8,7 @@ public class AddScore : MonoBehaviour
     public float time = 1f;
     TextMeshProUGUI scoreUI;
     public int score;
+    public int addToScore;
 
     private void Start()
     {
@@ -28,7 +29,7 @@ public class AddScore : MonoBehaviour
 
     void UpdateScore()
     {
-        score += 10;
+        score += addToScore;
         scoreUI.text = score.ToString();
         time = 1f;
     }

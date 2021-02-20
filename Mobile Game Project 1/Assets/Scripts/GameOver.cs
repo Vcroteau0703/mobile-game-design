@@ -15,7 +15,6 @@ public class GameOver : MonoBehaviour
     private AddScore addScore;
     private SpawnPickups spawnPickups;
     private PickUp pickUp;
-    public int bestScore;
 
     private void Awake()
     {
@@ -38,10 +37,9 @@ public class GameOver : MonoBehaviour
     void Pause()
     {
         gameOver.SetActive(true);
-        moveByTouch.gameActive = false;
         spawnPickups.gameActive = false;
         StopCoroutine(spawnPickups.StartSpawning());
-        spawnPickups.enabled = false;
+        moveByTouch.gameActive = false;
         pickUp.enabled = false;
         addScore.enabled = false;
     }

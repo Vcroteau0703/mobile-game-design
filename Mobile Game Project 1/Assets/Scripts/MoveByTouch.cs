@@ -11,7 +11,8 @@ public class PlayerBoundary
 
 public class MoveByTouch : MonoBehaviour
 {
-
+    public GameObject score;
+    private AddScore addScore;
     public PlayerBoundary boundary;
     public float screenWidth = Screen.width;
     public float moveSpeed;
@@ -20,12 +21,15 @@ public class MoveByTouch : MonoBehaviour
     private Vector2 touchPosition;
     private Rigidbody2D rb;
     public bool gameActive = true;
+    int scoreBound = 100;
+
     //public Vector2 destination;
 
     private void Awake()
     {
         //destination = transform.position;
         rb = GetComponent<Rigidbody2D>();
+        addScore = score.GetComponent<AddScore>();
     }
 
     // Update is called once per frame
@@ -39,13 +43,13 @@ public class MoveByTouch : MonoBehaviour
                 if (touch.position.x > (screenWidth / 2))
                 {
                     //right
-                    moveSpeed = 5;
+                    moveSpeed = 7;
                     //transform.Translate(moveSpeed, upSpeed, 0);
                 }
                 else
                 {
                     //left
-                    moveSpeed = -5;
+                    moveSpeed = -7;
                     //transform.Translate(-moveSpeed, upSpeed, 0);
                 }
             }
@@ -53,6 +57,12 @@ public class MoveByTouch : MonoBehaviour
             {
                 moveSpeed = 0;
                 //transform.Translate(0, upSpeed, 0);
+            }
+            if(addScore.score > scoreBound)
+            {
+                upSpeed++;
+                scoreBound += 100;
+                addScore.addToScore += 1;
             }
 
             rb.velocity = new Vector3(moveSpeed, upSpeed, 0);
