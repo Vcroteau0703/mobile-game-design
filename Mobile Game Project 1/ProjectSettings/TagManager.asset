@@ -6,6 +6,8 @@ TagManager:
   tags:
   - water
   - sunlight
+  - insect
+  - swarm
   layers:
   - Default
   - TransparentFX
