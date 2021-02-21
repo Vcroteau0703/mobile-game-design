@@ -23,11 +23,8 @@ public class MoveByTouch : MonoBehaviour
     public bool gameActive = true;
     int scoreBound = 100;
 
-    //public Vector2 destination;
-
     private void Awake()
     {
-        //destination = transform.position;
         rb = GetComponent<Rigidbody2D>();
         addScore = score.GetComponent<AddScore>();
     }
