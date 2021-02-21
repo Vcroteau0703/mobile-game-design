@@ -15,11 +15,20 @@ public class PickUp : MonoBehaviour
     public float curSunVal;
     public GameObject swarmingInsect;
     public int insectCount = 0;
+    AudioSource[] audioSources;
+    AudioSource waterSFX;
+    AudioSource sunlightSFX;
+    AudioSource insectSFX;
 
     private void Awake()
     {
         waterValue = curWaterVal = waterSlider.value; 
         sunValue = curSunVal = sunSlider.value;
+        audioSources = GetComponents<AudioSource>();
+        waterSFX = audioSources[0];
+        sunlightSFX = audioSources[1];
+        insectSFX = audioSources[2];
+
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -27,18 +36,21 @@ public class PickUp : MonoBehaviour
         {
             waterValue += 20;
             sunValue -= 5;
+            waterSFX.Play();
             Destroy(collision.gameObject);
         }
         else if (collision.tag == "sunlight")
         {
             sunValue += 20;
             waterValue -= 5;
+            sunlightSFX.Play();
             Destroy(collision.gameObject);
         }
         else if (collision.tag == "insect")
         {
             waterValue -= 10;
             sunValue -= 10;
+            insectSFX.Play();
             Destroy(collision.gameObject);
             Instantiate(swarmingInsect, transform, false);
             insectCount++;
