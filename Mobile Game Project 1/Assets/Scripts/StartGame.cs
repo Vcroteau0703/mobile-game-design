@@ -5,7 +5,12 @@ using UnityEngine.SceneManagement;
 
 public class StartGame : MonoBehaviour
 {
+    public GameObject music;
 
+    private void Awake()
+    {
+        DontDestroyOnLoad(music);
+    }
 
     // Update is called once per frame
     void Update()
